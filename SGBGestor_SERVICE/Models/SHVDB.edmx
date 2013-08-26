@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="shvgasModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="shvgasModelStoreContainer">
+          <EntitySet Name="CommandType" EntityType="shvgasModel.Store.CommandType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Concorrente_X_Produto" EntityType="shvgasModel.Store.Concorrente_X_Produto" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Concorrentes" EntityType="shvgasModel.Store.Concorrentes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Entregador" EntityType="shvgasModel.Store.Entregador" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HistSolicitacao" EntityType="shvgasModel.Store.HistSolicitacao" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MobileCommands" EntityType="shvgasModel.Store.MobileCommands" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Produtos" EntityType="shvgasModel.Store.Produtos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Provision" EntityType="shvgasModel.Store.Provision" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sla_Atendimento" EntityType="shvgasModel.Store.Sla_Atendimento" store:Type="Tables" store:Schema="dbo" store:Name="Sla_Atendimento">
+            <DefiningQuery>SELECT 
+      [Sla_Atendimento].[T1] AS [T1], 
+      [Sla_Atendimento].[T2] AS [T2]
+      FROM [dbo].[Sla_Atendimento] AS [Sla_Atendimento]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Solicitacao" EntityType="shvgasModel.Store.Solicitacao" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StatusDescartadosMobile" EntityType="shvgasModel.Store.StatusDescartadosMobile" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="CommandType">
+          <Key>
+            <PropertyRef Name="CommandTypeId" />
+          </Key>
+          <Property Name="CommandTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Concorrente_X_Produto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="idSolicitacao" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="codProduto" Type="varchar" MaxLength="50" />
+          <Property Name="idConcorrente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Concorrentes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entregador">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="char" Nullable="false" MaxLength="11" />
+          <Property Name="nome" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="empresa" Type="varchar" MaxLength="30" />
+          <Property Name="endereco" Type="varchar" MaxLength="50" />
+          <Property Name="contato" Type="varchar" MaxLength="30" />
+          <Property Name="telefone" Type="varchar" MaxLength="20" />
+          <Property Name="Central" Type="int" />
+          <Property Name="Canal" Type="int" />
+          <Property Name="login" Type="char" MaxLength="15" />
+          <Property Name="senha" Type="char" MaxLength="15" />
+          <Property Name="IDRevenda" Type="int" />
+          <Property Name="versionWAP" Type="int" Nullable="false" />
+          <Property Name="isVip" Type="bit" />
+          <Property Name="concorrencia" Type="bit" />
+          <Property Name="isWeb" Type="bit" />
+        </EntityType>
+        <EntityType Name="HistSolicitacao">
+          <Key>
+            <PropertyRef Name="IDHistSolicitacao" />
+          </Key>
+          <Property Name="IDHistSolicitacao" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CodMensagem" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="CodSolicitacao" Type="varchar" MaxLength="20" />
+          <Property Name="Tipo" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Responsavel" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Celular" Type="varchar" MaxLength="20" />
+          <Property Name="IDStatus" Type="int" Nullable="false" />
+          <Property Name="Mensagem" Type="varchar" Nullable="false" MaxLength="700" />
+          <Property Name="Observacao" Type="varchar" MaxLength="150" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Contador" Type="int" Nullable="false" />
+          <Property Name="DataOrigem" Type="datetime" />
+          <Property Name="StatusDispatch" Type="bigint" Nullable="false" />
+          <Property Name="created_by" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="MobileCommands">
+          <Key>
+            <PropertyRef Name="CommandId" />
+          </Key>
+          <Property Name="CommandId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CommandType" Type="int" Nullable="false" />
+          <Property Name="IsPending" Type="bit" Nullable="false" />
+          <Property Name="DeviceNumber" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Message" Type="varchar" MaxLength="500" />
+          <Property Name="CodMensagem" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ExecutedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Produtos">
+          <Key>
+            <PropertyRef Name="idSolicitacao" />
+            <PropertyRef Name="codProduto" />
+          </Key>
+          <Property Name="idSolicitacao" Type="int" Nullable="false" />
+          <Property Name="codProduto" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="descricao" Type="varchar" MaxLength="50" />
+          <Property Name="qtde" Type="int" Nullable="false" />
+          <Property Name="wapQtdeEntregue" Type="int" Nullable="false" />
+          <Property Name="qtdeEditada" Type="bit" Nullable="false" />
+          <Property Name="indice" Type="int" />
+        </EntityType>
+        <EntityType Name="Provision">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="celular" Type="varchar" Nullable="false" MaxLength="11" />
+          <Property Name="data" Type="datetime" Nullable="false" />
+          <Property Name="provisionado" Type="bit" Nullable="false" />
+          <Property Name="dataUltimaAutenticacao" Type="datetime" />
+          <Property Name="keyValue" Type="varchar" MaxLength="25" />
+          <Property Name="keyValueOld" Type="varchar" MaxLength="25" />
+          <Property Name="version" Type="varchar" MaxLength="5" />
+          <Property Name="lastSync" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SgbGestorDev.dbo.Sla_Atendimento' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Sla_Atendimento">
+          <Key>
+            <PropertyRef Name="T1" />
+            <PropertyRef Name="T2" />
+          </Key>
+          <Property Name="T1" Type="int" Nullable="false" />
+          <Property Name="T2" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Solicitacao">
+          <Key>
+            <PropertyRef Name="IDSolicitacao" />
+          </Key>
+          <Property Name="IDSolicitacao" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CodMensagem" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CodSolicitacao" Type="varchar" MaxLength="50" />
+          <Property Name="Tipo" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Responsavel" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Celular" Type="varchar" MaxLength="20" />
+          <Property Name="IDStatus" Type="int" Nullable="false" />
+          <Property Name="Mensagem" Type="varchar" Nullable="false" MaxLength="700" />
+          <Property Name="Observacao" Type="varchar" MaxLength="400" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Contador" Type="int" Nullable="false" />
+          <Property Name="DataOrigem" Type="datetime" />
+          <Property Name="coletarOFR" Type="bit" />
+          <Property Name="editarQtdes" Type="bit" />
+          <Property Name="wapOfrNr" Type="int" />
+          <Property Name="transferedTo" Type="char" MaxLength="10" />
+          <Property Name="transferido" Type="bit" />
+          <Property Name="cntNavegacao" Type="int" />
+          <Property Name="latitude" Type="varchar" MaxLength="50" />
+          <Property Name="longitude" Type="varchar" MaxLength="50" />
+          <Property Name="username" Type="varchar" MaxLength="20" />
+          <Property Name="LastPackageSent" Type="bigint" />
+          <Property Name="ATRASO" Type="varchar" MaxLength="50" />
+          <Property Name="SUPERBOTAO" Type="int" />
+          <Property Name="QRCODE" Type="varchar" MaxLength="500" />
+          <Property Name="RESULTADO_TESTE" Type="varchar" MaxLength="50" />
+          <Property Name="PERIODICIDADE" Type="varchar" MaxLength="50" />
+          <Property Name="ASSINOU_TERMO" Type="bit" />
+          <Property Name="URL_FOTO_CONTRATO" Type="varchar" MaxLength="1000" />
+          <Property Name="ORIGIN" Type="int" />
+          <Property Name="COMPOSICAO" Type="varchar" MaxLength="500" />
+          <Property Name="MOTIVO_NAO_MOVIMENTACAO" Type="varchar" MaxLength="50" />
+          <Property Name="MOTIVO_SUPERBOTAO" Type="varchar" MaxLength="50" />
+          <Property Name="CONFIRMA_RETIRADA" Type="bit" />
+          <Property Name="RECUPERAR_WEB" Type="bit" />
+          <Property Name="SyncTransferredMobile" Type="int" />
+          <Property Name="SecurityKeyMobile" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StatusDescartadosMobile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="codmensagem" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="telefone" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="dataStatus" Type="datetime" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="shvgasModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ShvGasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Concorrentes" EntityType="shvgasModel.Concorrentes" />
+          <EntitySet Name="Entregador" EntityType="shvgasModel.Entregador" />
+          <EntitySet Name="HistSolicitacao" EntityType="shvgasModel.HistSolicitacao" />
+          <EntitySet Name="Produtos" EntityType="shvgasModel.Produtos" />
+          <EntitySet Name="Sla_Atendimento" EntityType="shvgasModel.Sla_Atendimento" />
+          <EntitySet Name="Solicitacao" EntityType="shvgasModel.Solicitacao" />
+          <EntitySet Name="Provision" EntityType="shvgasModel.Provision" />
+          <EntitySet Name="StatusDescartadosMobile" EntityType="shvgasModel.StatusDescartadosMobile" />
+          <EntitySet Name="CommandType" EntityType="shvgasModel.CommandType" />
+          <EntitySet Name="MobileCommands" EntityType="shvgasModel.MobileCommands" />
+          <EntitySet Name="Concorrente_X_Produto" EntityType="shvgasModel.Concorrente_X_Produto" />
+        </EntityContainer>
+        <EntityType Name="Concorrentes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entregador">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="String" Nullable="false" MaxLength="11" Unicode="false" FixedLength="true" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="empresa" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="endereco" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="contato" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="telefone" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Central" Type="Int32" />
+          <Property Name="Canal" Type="Int32" />
+          <Property Name="login" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="senha" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="IDRevenda" Type="Int32" />
+          <Property Name="versionWAP" Type="Int32" Nullable="false" />
+          <Property Name="isVip" Type="Boolean" />
+          <Property Name="concorrencia" Type="Boolean" />
+          <Property Name="isWeb" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="HistSolicitacao">
+          <Key>
+            <PropertyRef Name="IDHistSolicitacao" />
+          </Key>
+          <Property Name="IDHistSolicitacao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodMensagem" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="CodSolicitacao" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Responsavel" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Celular" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="IDStatus" Type="Int32" Nullable="false" />
+          <Property Name="Mensagem" Type="String" Nullable="false" MaxLength="700" Unicode="false" FixedLength="false" />
+          <Property Name="Observacao" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Contador" Type="Int32" Nullable="false" />
+          <Property Name="DataOrigem" Type="DateTime" Precision="3" />
+          <Property Name="StatusDispatch" Type="Int64" Nullable="false" />
+          <Property Type="String" Name="created_by" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Produtos">
+          <Key>
+            <PropertyRef Name="idSolicitacao" />
+            <PropertyRef Name="codProduto" />
+          </Key>
+          <Property Name="idSolicitacao" Type="Int32" Nullable="false" />
+          <Property Name="codProduto" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="qtde" Type="Int32" Nullable="false" />
+          <Property Name="wapQtdeEntregue" Type="Int32" Nullable="false" />
+          <Property Name="qtdeEditada" Type="Boolean" Nullable="false" />
+          <Property Type="Int32" Name="indice" />
+          <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Sla_Atendimento">
+          <Key>
+            <PropertyRef Name="T1" />
+            <PropertyRef Name="T2" />
+          </Key>
+          <Property Type="Int32" Name="T1" Nullable="false" />
+          <Property Type="Int32" Name="T2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Solicitacao">
+          <Key>
+            <PropertyRef Name="IDSolicitacao" />
+          </Key>
+          <Property Type="Int32" Name="IDSolicitacao" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CodMensagem" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CodSolicitacao" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Responsavel" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Celular" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IDStatus" Nullable="false" />
+          <Property Type="String" Name="Mensagem" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Observacao" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Data" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="Contador" Nullable="false" />
+          <Property Type="DateTime" Name="DataOrigem" Precision="3" />
+          <Property Type="Boolean" Name="coletarOFR" />
+          <Property Type="Boolean" Name="editarQtdes" />
+          <Property Type="Int32" Name="wapOfrNr" />
+          <Property Type="String" Name="transferedTo" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="Boolean" Name="transferido" />
+          <Property Type="Int32" Name="cntNavegacao" />
+          <Property Type="String" Name="latitude" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="longitude" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="username" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="LastPackageSent" />
+          <Property Type="String" Name="ATRASO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SUPERBOTAO" />
+          <Property Type="String" Name="QRCODE" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RESULTADO_TESTE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PERIODICIDADE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="ASSINOU_TERMO" />
+          <Property Type="String" Name="URL_FOTO_CONTRATO" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ORIGIN" />
+          <Property Type="String" Name="COMPOSICAO" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MOTIVO_NAO_MOVIMENTACAO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MOTIVO_SUPERBOTAO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="CONFIRMA_RETIRADA" />
+          <Property Type="Boolean" Name="RECUPERAR_WEB" />
+          <Property Type="Int32" Name="SyncTransferredMobile" />
+          <Property Type="String" Name="SecurityKeyMobile" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Provision">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="celular" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="data" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="provisionado" Nullable="false" />
+          <Property Type="DateTime" Name="dataUltimaAutenticacao" Precision="3" />
+          <Property Type="String" Name="keyValue" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="keyValueOld" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="version" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="lastSync" Precision="3" />
+        </EntityType>
+        <EntityType Name="StatusDescartadosMobile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="codmensagem" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="telefone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="status" Nullable="false" />
+          <Property Type="DateTime" Name="dataStatus" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="createdAt" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="CommandType">
+          <Key>
+            <PropertyRef Name="CommandTypeId" />
+          </Key>
+          <Property Type="Int32" Name="CommandTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MobileCommands">
+          <Key>
+            <PropertyRef Name="CommandId" />
+          </Key>
+          <Property Type="Int32" Name="CommandId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CommandType" Nullable="false" />
+          <Property Type="Boolean" Name="IsPending" Nullable="false" />
+          <Property Type="String" Name="DeviceNumber" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Message" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CodMensagem" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedAt" Precision="3" />
+          <Property Type="DateTime" Name="ExecutedAt" Precision="3" />
+        </EntityType>
+        <EntityType Name="Concorrente_X_Produto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="idSolicitacao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="codProduto" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="idConcorrente" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="shvgasModelStoreContainer" CdmEntityContainer="ShvGasEntities">
+          <EntitySetMapping Name="Concorrentes"><EntityTypeMapping TypeName="shvgasModel.Concorrentes"><MappingFragment StoreEntitySet="Concorrentes">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="descricao" ColumnName="descricao" />
+            <ScalarProperty Name="active" ColumnName="active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Entregador"><EntityTypeMapping TypeName="shvgasModel.Entregador"><MappingFragment StoreEntitySet="Entregador">
+            <ScalarProperty Name="codigo" ColumnName="codigo" />
+            <ScalarProperty Name="nome" ColumnName="nome" />
+            <ScalarProperty Name="empresa" ColumnName="empresa" />
+            <ScalarProperty Name="endereco" ColumnName="endereco" />
+            <ScalarProperty Name="contato" ColumnName="contato" />
+            <ScalarProperty Name="telefone" ColumnName="telefone" />
+            <ScalarProperty Name="Central" ColumnName="Central" />
+            <ScalarProperty Name="Canal" ColumnName="Canal" />
+            <ScalarProperty Name="login" ColumnName="login" />
+            <ScalarProperty Name="senha" ColumnName="senha" />
+            <ScalarProperty Name="IDRevenda" ColumnName="IDRevenda" />
+            <ScalarProperty Name="versionWAP" ColumnName="versionWAP" />
+            <ScalarProperty Name="isVip" ColumnName="isVip" />
+            <ScalarProperty Name="concorrencia" ColumnName="concorrencia" />
+            <ScalarProperty Name="isWeb" ColumnName="isWeb" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="HistSolicitacao"><EntityTypeMapping TypeName="shvgasModel.HistSolicitacao"><MappingFragment StoreEntitySet="HistSolicitacao">
+            <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="IDHistSolicitacao" ColumnName="IDHistSolicitacao" />
+            <ScalarProperty Name="CodMensagem" ColumnName="CodMensagem" />
+            <ScalarProperty Name="CodSolicitacao" ColumnName="CodSolicitacao" />
+            <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+            <ScalarProperty Name="Responsavel" ColumnName="Responsavel" />
+            <ScalarProperty Name="Celular" ColumnName="Celular" />
+            <ScalarProperty Name="IDStatus" ColumnName="IDStatus" />
+            <ScalarProperty Name="Mensagem" ColumnName="Mensagem" />
+            <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+            <ScalarProperty Name="Data" ColumnName="Data" />
+            <ScalarProperty Name="Contador" ColumnName="Contador" />
+            <ScalarProperty Name="DataOrigem" ColumnName="DataOrigem" />
+            <ScalarProperty Name="StatusDispatch" ColumnName="StatusDispatch" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Produtos"><EntityTypeMapping TypeName="shvgasModel.Produtos"><MappingFragment StoreEntitySet="Produtos">
+            <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="indice" ColumnName="indice" />
+                <ScalarProperty Name="idSolicitacao" ColumnName="idSolicitacao" />
+            <ScalarProperty Name="codProduto" ColumnName="codProduto" />
+            <ScalarProperty Name="qtde" ColumnName="qtde" />
+            <ScalarProperty Name="wapQtdeEntregue" ColumnName="wapQtdeEntregue" />
+            <ScalarProperty Name="qtdeEditada" ColumnName="qtdeEditada" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Sla_Atendimento">
+            <EntityTypeMapping TypeName="shvgasModel.Sla_Atendimento">
+              <MappingFragment StoreEntitySet="Sla_Atendimento">
+                <ScalarProperty Name="T2" ColumnName="T2" />
+                <ScalarProperty Name="T1" ColumnName="T1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitacao">
+            <EntityTypeMapping TypeName="shvgasModel.Solicitacao">
+              <MappingFragment StoreEntitySet="Solicitacao">
+                <ScalarProperty Name="SecurityKeyMobile" ColumnName="SecurityKeyMobile" />
+                <ScalarProperty Name="SyncTransferredMobile" ColumnName="SyncTransferredMobile" />
+                <ScalarProperty Name="RECUPERAR_WEB" ColumnName="RECUPERAR_WEB" />
+                <ScalarProperty Name="CONFIRMA_RETIRADA" ColumnName="CONFIRMA_RETIRADA" />
+                <ScalarProperty Name="MOTIVO_SUPERBOTAO" ColumnName="MOTIVO_SUPERBOTAO" />
+                <ScalarProperty Name="MOTIVO_NAO_MOVIMENTACAO" ColumnName="MOTIVO_NAO_MOVIMENTACAO" />
+                <ScalarProperty Name="COMPOSICAO" ColumnName="COMPOSICAO" />
+                <ScalarProperty Name="ORIGIN" ColumnName="ORIGIN" />
+                <ScalarProperty Name="URL_FOTO_CONTRATO" ColumnName="URL_FOTO_CONTRATO" />
+                <ScalarProperty Name="ASSINOU_TERMO" ColumnName="ASSINOU_TERMO" />
+                <ScalarProperty Name="PERIODICIDADE" ColumnName="PERIODICIDADE" />
+                <ScalarProperty Name="RESULTADO_TESTE" ColumnName="RESULTADO_TESTE" />
+                <ScalarProperty Name="QRCODE" ColumnName="QRCODE" />
+                <ScalarProperty Name="SUPERBOTAO" ColumnName="SUPERBOTAO" />
+                <ScalarProperty Name="ATRASO" ColumnName="ATRASO" />
+                <ScalarProperty Name="LastPackageSent" ColumnName="LastPackageSent" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="cntNavegacao" ColumnName="cntNavegacao" />
+                <ScalarProperty Name="transferido" ColumnName="transferido" />
+                <ScalarProperty Name="transferedTo" ColumnName="transferedTo" />
+                <ScalarProperty Name="wapOfrNr" ColumnName="wapOfrNr" />
+                <ScalarProperty Name="editarQtdes" ColumnName="editarQtdes" />
+                <ScalarProperty Name="coletarOFR" ColumnName="coletarOFR" />
+                <ScalarProperty Name="DataOrigem" ColumnName="DataOrigem" />
+                <ScalarProperty Name="Contador" ColumnName="Contador" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+                <ScalarProperty Name="Mensagem" ColumnName="Mensagem" />
+                <ScalarProperty Name="IDStatus" ColumnName="IDStatus" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Responsavel" ColumnName="Responsavel" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="CodSolicitacao" ColumnName="CodSolicitacao" />
+                <ScalarProperty Name="CodMensagem" ColumnName="CodMensagem" />
+                <ScalarProperty Name="IDSolicitacao" ColumnName="IDSolicitacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provision">
+            <EntityTypeMapping TypeName="shvgasModel.Provision">
+              <MappingFragment StoreEntitySet="Provision">
+                <ScalarProperty Name="lastSync" ColumnName="lastSync" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="keyValueOld" ColumnName="keyValueOld" />
+                <ScalarProperty Name="keyValue" ColumnName="keyValue" />
+                <ScalarProperty Name="dataUltimaAutenticacao" ColumnName="dataUltimaAutenticacao" />
+                <ScalarProperty Name="provisionado" ColumnName="provisionado" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusDescartadosMobile">
+            <EntityTypeMapping TypeName="shvgasModel.StatusDescartadosMobile">
+              <MappingFragment StoreEntitySet="StatusDescartadosMobile">
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="dataStatus" ColumnName="dataStatus" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="codmensagem" ColumnName="codmensagem" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommandType">
+            <EntityTypeMapping TypeName="shvgasModel.CommandType">
+              <MappingFragment StoreEntitySet="CommandType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CommandTypeId" ColumnName="CommandTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MobileCommands">
+            <EntityTypeMapping TypeName="shvgasModel.MobileCommands">
+              <MappingFragment StoreEntitySet="MobileCommands">
+                <ScalarProperty Name="ExecutedAt" ColumnName="ExecutedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CodMensagem" ColumnName="CodMensagem" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="DeviceNumber" ColumnName="DeviceNumber" />
+                <ScalarProperty Name="IsPending" ColumnName="IsPending" />
+                <ScalarProperty Name="CommandType" ColumnName="CommandType" />
+                <ScalarProperty Name="CommandId" ColumnName="CommandId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Concorrente_X_Produto">
+            <EntityTypeMapping TypeName="shvgasModel.Concorrente_X_Produto">
+              <MappingFragment StoreEntitySet="Concorrente_X_Produto">
+                <ScalarProperty Name="idConcorrente" ColumnName="idConcorrente" />
+                <ScalarProperty Name="codProduto" ColumnName="codProduto" />
+                <ScalarProperty Name="idSolicitacao" ColumnName="idSolicitacao" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="SHVDB" ZoomLevel="101">
+        <EntityTypeShape EntityType="shvgasModel.Concorrentes" Width="1.5" PointX="0.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="shvgasModel.Entregador" Width="1.5" PointX="2.75" PointY="0.75" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="shvgasModel.HistSolicitacao" Width="1.5" PointX="4.75" PointY="0.75" Height="3.5186979166666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="shvgasModel.Produtos" Width="1.5" PointX="0.75" PointY="5.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="shvgasModel.Sla_Atendimento" Width="1.5" PointX="6.875" PointY="5.875" Height="1.4033821614583317" />
+        <EntityTypeShape EntityType="shvgasModel.Solicitacao" Width="1.5" PointX="3.5" PointY="5.375" Height="7.5570279947916674" />
+        <EntityTypeShape EntityType="shvgasModel.Provision" Width="1.5" PointX="7" PointY="0.75" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="shvgasModel.StatusDescartadosMobile" Width="1.5" PointX="0.75" PointY="8.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="shvgasModel.CommandType" Width="1.5" PointX="5.375" PointY="11.125" />
+        <EntityTypeShape EntityType="shvgasModel.MobileCommands" Width="1.5" PointX="7.25" PointY="11.125" />
+        <EntityTypeShape EntityType="shvgasModel.Concorrente_X_Produto" Width="1.5" PointX="6.875" PointY="7.75" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
