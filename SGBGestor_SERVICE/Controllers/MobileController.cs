@@ -362,40 +362,7 @@ namespace SGBGestor_SERVICE.Controllers
 
             return Json(sla, JsonRequestBehavior.AllowGet);
         }
-
-        /// <summary>
-        /// Recebe via fileupload a imagem do termo de responsabilidade
-        /// </summary>
-        /// <param name="uploadedfile">arquivo de imagem no padrão JPG</param>
-        /// <returns>
-        /// retona 0 para fracasso e 1 para sucesso
-        /// </returns>
-        [HttpPost]
-        public JsonResult fileUpload(HttpPostedFileBase uploadedfile)
-        {
-            logger.Info("fileUpload");
-
-            try
-            {
-                Repository repo = new Repository();
-
-                if (uploadedfile != null && uploadedfile.ContentLength > 0)
-                {
-                    logger.Info("file name : " + uploadedfile.FileName);
-                    uploadedfile.SaveAs(Server.MapPath("~/Content/Uploads/foto/") + Path.GetFileName(uploadedfile.FileName).Replace("sgb_",""));
-                    uploadedfile.SaveAs(Server.MapPath("~/Content/Backup/") + Path.GetFileName(uploadedfile.FileName).Replace("sgb_", ""));
-                    repo.AtualizarFotoContrato(uploadedfile.FileName.Replace("sgb_", "").Replace(".jpg", ""));
-                }
-
-                return Json(1, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                logger.Error("fileUpload ERROR : " + ex.Message + " [ " + ex.InnerException.StackTrace + "]");
-                return Json(0, JsonRequestBehavior.AllowGet);
-            }
-        }
-
+        
         /// <summary>
         /// Recebe a confirmacao do mobile com relacao ao salvamento da OS
         /// </summary>

@@ -11,5 +11,6 @@ namespace SGBGestor_SERVICE.Models
         public string codmensagem { get; set; }
         public int quantidade { get; set; }
         public string descricao { get; set; }
+        public double valor { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace SGBGestor_SERVICE.Utils
                 produto.quantidade = p.qtde;
                 produto.codmensagem = codmensagem;
                 produto.codproduto = p.codProduto;
+                produto.valor = p.valor;
                 lista_produtos.Add(produto);
             }
                         

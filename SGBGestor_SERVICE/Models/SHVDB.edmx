@@ -106,11 +106,12 @@
           </Key>
           <Property Name="idSolicitacao" Type="int" Nullable="false" />
           <Property Name="codProduto" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="descricao" Type="varchar" MaxLength="50" />
+          <Property Name="descricao" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="qtde" Type="int" Nullable="false" />
           <Property Name="wapQtdeEntregue" Type="int" Nullable="false" />
           <Property Name="qtdeEditada" Type="bit" Nullable="false" />
-          <Property Name="indice" Type="int" />
+          <Property Name="indice" Type="int" Nullable="false" />
+          <Property Name="valor" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Provision">
           <Key>
@@ -153,9 +154,7 @@
           <Property Name="Data" Type="datetime" Nullable="false" />
           <Property Name="Contador" Type="int" Nullable="false" />
           <Property Name="DataOrigem" Type="datetime" />
-          <Property Name="coletarOFR" Type="bit" />
           <Property Name="editarQtdes" Type="bit" />
-          <Property Name="wapOfrNr" Type="int" />
           <Property Name="transferedTo" Type="char" MaxLength="10" />
           <Property Name="transferido" Type="bit" />
           <Property Name="cntNavegacao" Type="int" />
@@ -164,18 +163,23 @@
           <Property Name="username" Type="varchar" MaxLength="20" />
           <Property Name="LastPackageSent" Type="bigint" />
           <Property Name="ATRASO" Type="varchar" MaxLength="50" />
-          <Property Name="SUPERBOTAO" Type="int" />
-          <Property Name="QRCODE" Type="varchar" MaxLength="500" />
-          <Property Name="RESULTADO_TESTE" Type="varchar" MaxLength="50" />
-          <Property Name="PERIODICIDADE" Type="varchar" MaxLength="50" />
-          <Property Name="ASSINOU_TERMO" Type="bit" />
-          <Property Name="URL_FOTO_CONTRATO" Type="varchar" MaxLength="1000" />
-          <Property Name="ORIGIN" Type="int" />
-          <Property Name="COMPOSICAO" Type="varchar" MaxLength="500" />
-          <Property Name="MOTIVO_NAO_MOVIMENTACAO" Type="varchar" MaxLength="50" />
-          <Property Name="MOTIVO_SUPERBOTAO" Type="varchar" MaxLength="50" />
+          <Property Name="DATAENTREGA" Type="datetime" />
+          <Property Name="VALORTOTAL" Type="float" />
+          <Property Name="FORMAPGTO" Type="varchar" MaxLength="50" />
+          <Property Name="TROCO" Type="float" />
+          <Property Name="CODCLIENTE" Type="varchar" MaxLength="50" />
+          <Property Name="CLIENTE" Type="varchar" MaxLength="50" />
+          <Property Name="TELEFONE" Type="varchar" MaxLength="50" />
+          <Property Name="LOGRADOURO" Type="varchar" MaxLength="50" />
+          <Property Name="NUMERO" Type="int" />
+          <Property Name="COMPLEMENTO" Type="varchar" MaxLength="50" />
+          <Property Name="BAIRRO" Type="varchar" MaxLength="50" />
+          <Property Name="CIDADE" Type="varchar" MaxLength="50" />
+          <Property Name="UF" Type="varchar" MaxLength="50" />
+          <Property Name="REFERENCIA" Type="varchar" MaxLength="50" />
           <Property Name="CONFIRMA_RETIRADA" Type="bit" />
           <Property Name="RECUPERAR_WEB" Type="bit" />
+          <Property Name="COMPOSICAO" Type="varchar" MaxLength="250" />
           <Property Name="SyncTransferredMobile" Type="int" />
           <Property Name="SecurityKeyMobile" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -264,8 +268,9 @@
           <Property Name="qtde" Type="Int32" Nullable="false" />
           <Property Name="wapQtdeEntregue" Type="Int32" Nullable="false" />
           <Property Name="qtdeEditada" Type="Boolean" Nullable="false" />
-          <Property Type="Int32" Name="indice" />
-          <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="indice" Nullable="false" />
+          <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="false" />
         </EntityType>
         <EntityType Name="Sla_Atendimento">
           <Key>
@@ -291,9 +296,7 @@
           <Property Type="DateTime" Name="Data" Nullable="false" Precision="3" />
           <Property Type="Int32" Name="Contador" Nullable="false" />
           <Property Type="DateTime" Name="DataOrigem" Precision="3" />
-          <Property Type="Boolean" Name="coletarOFR" />
           <Property Type="Boolean" Name="editarQtdes" />
-          <Property Type="Int32" Name="wapOfrNr" />
           <Property Type="String" Name="transferedTo" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Type="Boolean" Name="transferido" />
           <Property Type="Int32" Name="cntNavegacao" />
@@ -302,20 +305,24 @@
           <Property Type="String" Name="username" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="Int64" Name="LastPackageSent" />
           <Property Type="String" Name="ATRASO" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="SUPERBOTAO" />
-          <Property Type="String" Name="QRCODE" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="RESULTADO_TESTE" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PERIODICIDADE" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="ASSINOU_TERMO" />
-          <Property Type="String" Name="URL_FOTO_CONTRATO" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="ORIGIN" />
-          <Property Type="String" Name="COMPOSICAO" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="MOTIVO_NAO_MOVIMENTACAO" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="MOTIVO_SUPERBOTAO" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="CONFIRMA_RETIRADA" />
+          <Property Type="String" Name="COMPOSICAO" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="RECUPERAR_WEB" />
           <Property Type="Int32" Name="SyncTransferredMobile" />
           <Property Type="String" Name="SecurityKeyMobile" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DATAENTREGA" Precision="3" />
+          <Property Type="Double" Name="VALORTOTAL" />
+          <Property Type="String" Name="FORMAPGTO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="TROCO" />
+          <Property Type="String" Name="CODCLIENTE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CLIENTE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TELEFONE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LOGRADOURO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="NUMERO" />
+          <Property Type="String" Name="COMPLEMENTO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BAIRRO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CIDADE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UF" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="REFERENCIA" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Provision">
           <Key>
@@ -416,7 +423,8 @@
             <ScalarProperty Name="StatusDispatch" ColumnName="StatusDispatch" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Produtos"><EntityTypeMapping TypeName="shvgasModel.Produtos"><MappingFragment StoreEntitySet="Produtos">
-            <ScalarProperty Name="descricao" ColumnName="descricao" />
+            <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
                 <ScalarProperty Name="indice" ColumnName="indice" />
                 <ScalarProperty Name="idSolicitacao" ColumnName="idSolicitacao" />
             <ScalarProperty Name="codProduto" ColumnName="codProduto" />
@@ -435,20 +443,24 @@
           <EntitySetMapping Name="Solicitacao">
             <EntityTypeMapping TypeName="shvgasModel.Solicitacao">
               <MappingFragment StoreEntitySet="Solicitacao">
+                <ScalarProperty Name="REFERENCIA" ColumnName="REFERENCIA" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="CIDADE" ColumnName="CIDADE" />
+                <ScalarProperty Name="BAIRRO" ColumnName="BAIRRO" />
+                <ScalarProperty Name="COMPLEMENTO" ColumnName="COMPLEMENTO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="LOGRADOURO" ColumnName="LOGRADOURO" />
+                <ScalarProperty Name="TELEFONE" ColumnName="TELEFONE" />
+                <ScalarProperty Name="CLIENTE" ColumnName="CLIENTE" />
+                <ScalarProperty Name="CODCLIENTE" ColumnName="CODCLIENTE" />
+                <ScalarProperty Name="TROCO" ColumnName="TROCO" />
+                <ScalarProperty Name="FORMAPGTO" ColumnName="FORMAPGTO" />
+                <ScalarProperty Name="VALORTOTAL" ColumnName="VALORTOTAL" />
+                <ScalarProperty Name="DATAENTREGA" ColumnName="DATAENTREGA" />
                 <ScalarProperty Name="SecurityKeyMobile" ColumnName="SecurityKeyMobile" />
                 <ScalarProperty Name="SyncTransferredMobile" ColumnName="SyncTransferredMobile" />
                 <ScalarProperty Name="RECUPERAR_WEB" ColumnName="RECUPERAR_WEB" />
-                <ScalarProperty Name="CONFIRMA_RETIRADA" ColumnName="CONFIRMA_RETIRADA" />
-                <ScalarProperty Name="MOTIVO_SUPERBOTAO" ColumnName="MOTIVO_SUPERBOTAO" />
-                <ScalarProperty Name="MOTIVO_NAO_MOVIMENTACAO" ColumnName="MOTIVO_NAO_MOVIMENTACAO" />
                 <ScalarProperty Name="COMPOSICAO" ColumnName="COMPOSICAO" />
-                <ScalarProperty Name="ORIGIN" ColumnName="ORIGIN" />
-                <ScalarProperty Name="URL_FOTO_CONTRATO" ColumnName="URL_FOTO_CONTRATO" />
-                <ScalarProperty Name="ASSINOU_TERMO" ColumnName="ASSINOU_TERMO" />
-                <ScalarProperty Name="PERIODICIDADE" ColumnName="PERIODICIDADE" />
-                <ScalarProperty Name="RESULTADO_TESTE" ColumnName="RESULTADO_TESTE" />
-                <ScalarProperty Name="QRCODE" ColumnName="QRCODE" />
-                <ScalarProperty Name="SUPERBOTAO" ColumnName="SUPERBOTAO" />
                 <ScalarProperty Name="ATRASO" ColumnName="ATRASO" />
                 <ScalarProperty Name="LastPackageSent" ColumnName="LastPackageSent" />
                 <ScalarProperty Name="username" ColumnName="username" />
@@ -457,9 +469,7 @@
                 <ScalarProperty Name="cntNavegacao" ColumnName="cntNavegacao" />
                 <ScalarProperty Name="transferido" ColumnName="transferido" />
                 <ScalarProperty Name="transferedTo" ColumnName="transferedTo" />
-                <ScalarProperty Name="wapOfrNr" ColumnName="wapOfrNr" />
                 <ScalarProperty Name="editarQtdes" ColumnName="editarQtdes" />
-                <ScalarProperty Name="coletarOFR" ColumnName="coletarOFR" />
                 <ScalarProperty Name="DataOrigem" ColumnName="DataOrigem" />
                 <ScalarProperty Name="Contador" ColumnName="Contador" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
@@ -554,7 +564,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="SHVDB" ZoomLevel="101">
+      <Diagram Name="SHVDB" ZoomLevel="88">
         <EntityTypeShape EntityType="shvgasModel.Concorrentes" Width="1.5" PointX="0.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
         <EntityTypeShape EntityType="shvgasModel.Entregador" Width="1.5" PointX="2.75" PointY="0.75" Height="3.9033007812499996" IsExpanded="true" />
         <EntityTypeShape EntityType="shvgasModel.HistSolicitacao" Width="1.5" PointX="4.75" PointY="0.75" Height="3.5186979166666656" IsExpanded="true" />

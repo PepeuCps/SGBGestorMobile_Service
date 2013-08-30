@@ -14,7 +14,6 @@ namespace SGBGestor_SERVICE.Models
         private static int STATUS_TRANSFERIR = 4000;
         private static int STATUS_INICIO_CANCELAMENTO = 4001; 
         
-
         public Repository() {
             db = new ShvGasEntities();        
         }
@@ -47,38 +46,6 @@ namespace SGBGestor_SERVICE.Models
                 }
                 else
                 {
-                    // atualiza o OFR  se houver
-                    if (!String.IsNullOrEmpty(status.ofr))
-                        os.wapOfrNr = Convert.ToInt32(status.ofr);
-
-                    // atualiza o QRCODE  se houver
-                    if (!String.IsNullOrEmpty(status.qrcode))
-                        os.QRCODE = status.qrcode;
-
-                    // atualiza o RESULTADO_TESTE  se houver
-                    if (!String.IsNullOrEmpty(status.resultado_teste))
-                        os.RESULTADO_TESTE = status.resultado_teste;
-
-                    // atualiza o PERIODICIDADE  se houver
-                    if (!String.IsNullOrEmpty(status.periodicidade))
-                        os.PERIODICIDADE = status.periodicidade;
-
-                    // atualiza o ASSINOU_COMODATO  se houver
-                    if (!String.IsNullOrEmpty(status.assinou_comodato))
-                        os.ASSINOU_TERMO = status.assinou_comodato.ToLower().Contains("true");
-
-                    // atualiza o MOTIVO_NAO_MOVIMENTACAO  se houver
-                    if (!String.IsNullOrEmpty(status.motivo_nao_movimentacao))
-                        os.MOTIVO_NAO_MOVIMENTACAO = status.motivo_nao_movimentacao;
-
-                    // atualiza o MOTIVO_SUPERBOTAO  se houver
-                    if (!String.IsNullOrEmpty(status.motivo_superbotao))
-                        os.MOTIVO_SUPERBOTAO = status.motivo_superbotao;
-
-                    // atualiza o CONFIRMA_RETIRADA  se houver
-                    if (!String.IsNullOrEmpty(status.confirma_retirada))
-                        os.CONFIRMA_RETIRADA = status.confirma_retirada.ToLower().Equals("true") ? true : false;
-
                     HistSolicitacao historico_existente = db.HistSolicitacao.FirstOrDefault(h => h.IDStatus == status.idstatus &&
                         (h.Data.Year == data.Year && h.Data.Month == data.Month && h.Data.Day == data.Day &&
                          h.Data.Hour == data.Hour && h.Data.Minute == data.Minute && h.Data.Second == data.Second)); //Confere a data sem os milliseconds
@@ -213,9 +180,6 @@ namespace SGBGestor_SERVICE.Models
                     OrdemServicoIntegration order = ConvertSolicitacao(os);
                     order.produtos = new List<ProdutoIntegration>();
                     order.produtos = parser.ParseProducts(os.CodMensagem, listaProdutos);
-
-                    //Verifica se o pedido tem algum produto do superbotão
-                    order.superbotao = 0;
 
                     Entregador entregador = db.Entregador.FirstOrDefault(e => e.codigo == phone);
 
@@ -361,32 +325,27 @@ namespace SGBGestor_SERVICE.Models
             return si;
         }
 
-        public void AtualizarFotoContrato(String codmensagem)
-        {
-            //Retona as OSs pendentes de sincronização com o device
-            var listaOS = db.Solicitacao.Where(s =>
-                    s.CodMensagem == codmensagem).OrderByDescending(i => i.IDSolicitacao).ToList();
-
-            //Atualiza o lastpackagesent
-            foreach (var os in listaOS)
-            {
-                os.URL_FOTO_CONTRATO = codmensagem;
-            }
-
-            db.SaveChanges();
-        }
-
         private OrdemServicoIntegration ConvertSolicitacao(Solicitacao solicitacao)
         {
             OrdemServicoIntegration os = new OrdemServicoIntegration();
-
             os.codmensagem = solicitacao.CodMensagem;
             os.mensagem = solicitacao.Mensagem;
             os.data = solicitacao.DataOrigem.HasValue ? NetdateToJavadate(solicitacao.DataOrigem.Value) : NetdateToJavadate(new DateTime());
-            os.coletar_ofr = solicitacao.coletarOFR.HasValue ? solicitacao.coletarOFR.Value : false;
             os.editar_produtos = solicitacao.editarQtdes.HasValue ? solicitacao.editarQtdes.Value : false;
-            os.origem = solicitacao.ORIGIN.HasValue ? solicitacao.ORIGIN.Value : 1;
-
+            os.cliente = solicitacao.CLIENTE;
+            os.cod_cliente = solicitacao.CODCLIENTE;
+            os.logradouro = solicitacao.LOGRADOURO;
+            os.numero = solicitacao.NUMERO.ToString();
+            os.complemento = solicitacao.COMPLEMENTO;
+            os.bairro = solicitacao.BAIRRO;
+            os.cidade = solicitacao.CIDADE;
+            os.referencia = solicitacao.REFERENCIA;
+            os.data_entrega = solicitacao.DATAENTREGA.Value.ToString("dd/MM/yyyy hh:mm");
+            os.forma_pgto = solicitacao.FORMAPGTO;
+            os.troco = solicitacao.TROCO.ToString();
+            os.valor_total = solicitacao.VALORTOTAL.ToString();
+            os.telefone = solicitacao.TELEFONE;
+            os.obs = solicitacao.Observacao;
             return os;
         }
 
@@ -418,6 +377,8 @@ namespace SGBGestor_SERVICE.Models
                 prod.codproduto = item.codProduto;
                 prod.codmensagem = codmensagem;
                 prod.quantidade = item.qtde;
+                prod.descricao = item.descricao;
+                prod.valor = item.valor;
 
                 lista.Add(prod);
             }
