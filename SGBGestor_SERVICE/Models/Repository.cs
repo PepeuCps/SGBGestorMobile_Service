@@ -250,7 +250,7 @@ namespace SGBGestor_SERVICE.Models
                 var listaOS = db.Solicitacao.Where(s =>
                         s.Celular == phone &&
                         s.IDStatus == STATUS_INICIO_CANCELAMENTO &&
-                        s.SyncTransferredMobile == 0).ToList().Distinct();
+                        (s.SyncTransferredMobile == 0 || s.SyncTransferredMobile == null)).ToList().Distinct();
 
                 //Atualiza o lastpackagesent
                 foreach (var os in listaOS)
