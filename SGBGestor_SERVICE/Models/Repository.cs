@@ -46,7 +46,7 @@ namespace SGBGestor_SERVICE.Models
                 }
                 else
                 {
-                    HistSolicitacao historico_existente = db.HistSolicitacao.FirstOrDefault(h => h.IDStatus == status.idstatus &&
+                    HistSolicitacao historico_existente = db.HistSolicitacao.FirstOrDefault(h => h.CodMensagem == status.codmensagem && h.IDStatus == status.idstatus &&
                         (h.Data.Year == data.Year && h.Data.Month == data.Month && h.Data.Day == data.Day &&
                          h.Data.Hour == data.Hour && h.Data.Minute == data.Minute && h.Data.Second == data.Second)); //Confere a data sem os milliseconds
 
