@@ -340,7 +340,7 @@ namespace SGBGestor_SERVICE.Models
             os.bairro = solicitacao.BAIRRO;
             os.cidade = solicitacao.CIDADE;
             os.referencia = solicitacao.REFERENCIA;
-            os.data_entrega = solicitacao.DATAENTREGA.Value.ToString("dd/MM/yyyy hh:mm");
+            os.data_entrega = solicitacao.DATAENTREGA.Value.ToString("dd/MM/yyyy HH:mm");
             os.forma_pgto = solicitacao.FORMAPGTO;
             os.troco = solicitacao.TROCO.ToString();
             os.valor_total = solicitacao.VALORTOTAL.ToString();
